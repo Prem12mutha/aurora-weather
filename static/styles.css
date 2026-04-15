@@ -1,0 +1,375 @@
+:root {
+    /* LUXURY DARK THEME */
+    --primary: #ffffff;
+    --text: #e0e0e0;
+    --text-muted: #888888;
+    --card-bg: rgba(20, 20, 22, 0.4);
+    --card-border: rgba(255, 255, 255, 0.04);
+    --bg-color: #050505;
+    --metric-bg: rgba(255, 255, 255, 0.015);
+    --metric-border: rgba(255, 255, 255, 0.03);
+    --accent: #a3a3a3;
+    --high-temp: #f3f3f3;
+    --low-temp: #666666;
+}
+
+[data-theme="light"] {
+    /* LUXURY LIGHT THEME (Apple Aesthetic) */
+    --primary: #1d1d1f;
+    --text: #424245;
+    --text-muted: #86868b;
+    --card-bg: rgba(255, 255, 255, 0.65);
+    --card-border: rgba(0, 0, 0, 0.05);
+    --bg-color: #f5f5f7;
+    --metric-bg: rgba(255, 255, 255, 0.5);
+    --metric-border: rgba(0, 0, 0, 0.04);
+    --accent: #1d1d1f;
+    --high-temp: #1d1d1f;
+    --low-temp: #86868b;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1), color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* High-End Photographic Backgrounds */
+.ambient-glow {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('dark_bg.png');
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    pointer-events: none;
+}
+
+/* Light mode background loaded on top with variable opacity for seamless fading */
+.ambient-glow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('light_bg.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .ambient-glow::after {
+    opacity: 1;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 5, 5, 0.4); /* Reduces contrast of background to keep it luxurious */
+    z-index: -1;
+    pointer-events: none;
+    transition: background 0.8s ease;
+}
+
+[data-theme="light"] body::before {
+    background: rgba(245, 245, 247, 0.2); 
+}
+
+.app-container {
+    width: 100%;
+    max-width: 850px;
+    padding: 3rem 2rem;
+    z-index: 1;
+}
+
+header {
+    margin-bottom: 3.5rem;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.brand-logo {
+    width: 32px;
+    height: 32px;
+    color: var(--primary);
+    transition: color 0.8s ease;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: var(--primary);
+    text-transform: uppercase;
+    transition: color 0.8s ease;
+}
+
+.theme-btn {
+    background: transparent;
+    border: 1px solid var(--metric-border);
+    color: var(--primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-btn:hover {
+    background: var(--metric-bg);
+    transform: translateY(-2px);
+}
+
+/* Elegant, understated search bar */
+.search-box {
+    display: flex;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 0.8rem 1.5rem;
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    margin-bottom: 2.5rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.search-box:focus-within {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    border-color: var(--accent);
+}
+
+.search-box input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--primary);
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.search-box input::placeholder {
+    color: var(--text-muted);
+}
+
+.search-box button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--primary);
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.search-box button:hover {
+    opacity: 1;
+}
+
+/* Premium Glass Card */
+.glass-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 3rem;
+    backdrop-filter: blur(60px);
+    -webkit-backdrop-filter: blur(60px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0,0,0,0.02);
+    animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: background 0.8s ease, border-color 0.8s ease, box-shadow 0.8s ease;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Main Display */
+.weather-top-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 3.5rem;
+}
+
+.weather-main {
+    flex: 1;
+    min-width: 250px;
+}
+
+#location-name {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.temp-main {
+    font-size: 7rem;
+    font-weight: 200;
+    line-height: 1;
+    letter-spacing: -4px;
+    color: var(--primary);
+}
+
+.metrics-grid {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    min-width: 300px;
+}
+
+/* Restyled Metric Boxes: Less Boxy, More Minimalist */
+.metric {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.metric .label {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+}
+
+.metric .value {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--primary);
+}
+
+/* Subtle separator for forecast */
+.forecast-section {
+    border-top: 1px solid var(--metric-border);
+    padding-top: 2.5rem;
+}
+
+.forecast-section h3 {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-align: center;
+}
+
+.forecast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    gap: 1rem;
+}
+
+.forecast-item {
+    padding: 0.5rem;
+    text-align: center;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.forecast-item:hover {
+    transform: translateY(-4px);
+}
+
+.forecast-item h4 {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.forecast-temp {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.forecast-temp .high {
+    color: var(--primary);
+}
+
+.forecast-temp .low {
+    color: var(--text-muted);
+}
+
+.error-message {
+    background: transparent;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    padding: 5rem 0;
+}
+
+.spinner {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--metric-border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; filter: blur(10px); }
+    to { opacity: 1; filter: blur(0); }
+}
+
+/* Responsiveness adjustments for minimal grid */
+@media (max-width: 600px) {
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .weather-top-row {
+        gap: 2rem;
+    }
+}
